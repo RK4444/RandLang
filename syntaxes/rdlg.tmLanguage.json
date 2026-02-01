@@ -1,0 +1,111 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "RandLang",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#parenExpr"
+		},
+		{
+			"include": "#ifStatement"
+		},
+		{
+			"include": "#elseStatement"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.rdlg",
+				"match": "\\b(var|in|for|while|if|else)\\b"
+			},
+			{
+				"name":"support.function",
+				"match": "(fn|extern|binary|unary)"
+			}]
+		},
+		
+		"strings": {
+			"name": "string.quoted.double.rdlg",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.rdlg",
+					"match": "\\\\."
+				}
+			]
+		},
+		"parenExpr": {
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"0":{ "name":"punctuation.paren.open"}
+			},
+			"endCaptures": {
+				"0":{"name":"punctuation.paren.close"}
+			},
+			"name":"expression.group",
+			"patterns": [{ "include": "#variables"}]
+		},
+		"variables": {
+			"name":"support.variable",
+			"match": "\\b(?!fn|var|extern|if|else|for|in)[a-zA-Z0-9]+\\b"
+		},
+		"ifStatement":{
+			"name":"keyword.control.rdlg",
+			"match": "\\bif ([a-zA-Z0-9])(\\s*)(=|==|!=|<=|>=)(\\s*)([a-zA-Z0-9]+) then\\b",
+			"captures": {
+					"1":{
+						"name":"support.variable"
+					},
+					"3":{
+						"name":"keyword.operator"
+					},
+					"5":{
+						"name":"support.variable"
+					}
+				}
+		},
+		"elseStatement":{
+			"name":"keyword.control.rdlg",
+			"match": "\\belse\\b"
+		},
+		"forStatement":{
+			"name":"keyword.control.rdlg",
+			"match": "\\bfor ([a-zA-Z0-9])(\\s*)([=])(\\s*)([a-zA-Z0-9]+),(\\s*)([a-zA-Z]+)(\\s*)(=|==|!=|<=|>=)(\\s*)([a-zA-Z0-9]+)(,)?([0-9]+)? in\\b",
+			"captures": {
+				"1":{
+					"name":"support.variable"
+				},
+				"3":{
+					"name":"keyword.operator"
+				},
+				"5":{
+					"name":"support.constant"
+				},
+				"7":{
+					"name":"support.variable"
+				},
+				"9":{
+					"name":"keyword.operator"
+				},
+				"11":{
+					"name":"support.variable"
+				},
+				"13":{
+					"name":"support.constant"
+				}
+			}
+		}
+	},
+	"scopeName": "source.rdlg"
+}

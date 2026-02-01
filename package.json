@@ -1,0 +1,25 @@
+{
+  "name": "RandLang",
+  "displayName": "randlang",
+  "description": "Language Support for the RandLang language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.108.1"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "rdlg",
+      "aliases": ["RandLang", "rdlg"],
+      "extensions": [".rdlg"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "rdlg",
+      "scopeName": "source.rdlg",
+      "path": "./syntaxes/rdlg.tmLanguage.json"
+    }]
+  }
+}
